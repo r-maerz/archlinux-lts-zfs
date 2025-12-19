@@ -68,10 +68,10 @@ jobs:
           sed -i "s/initramfs-linux.img/initramfs-$kernel.img/" archiso_pxe-linux.cfg
 
           cd "$build"/efiboot/loader/entries
-          sed -i "s/vmlinuz-linux/vmlinuz-$kernel/" 01-archiso-x86_64-linux.conf
-          sed -i "s/initramfs-linux.img/initramfs-$kernel.img/" 01-archiso-x86_64-linux.conf
-          sed -i "s/vmlinuz-linux/vmlinuz-$kernel/" 02-archiso-x86_64-speech-linux.conf
-          sed -i "s/initramfs-linux.img/initramfs-$kernel.img/" 02-archiso-x86_64-speech-linux.conf
+          sed -i "s/vmlinuz-linux/vmlinuz-$kernel/" 01-archiso-linux.conf
+          sed -i "s/initramfs-linux.img/initramfs-$kernel.img/" 01-archiso-linux.conf
+          sed -i "s/vmlinuz-linux/vmlinuz-$kernel/" 02-archiso-speech-linux.conf
+          sed -i "s/initramfs-linux.img/initramfs-$kernel.img/" 02-archiso-speech-linux.conf
 
           cp "$build"/pacman.conf "$build"/airootfs/etc/pacman.conf
           mkdir -p "$build"/airootfs/usr/share/pacman/keyrings
