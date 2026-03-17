@@ -39,8 +39,8 @@ jobs:
           cp -r /usr/share/archiso/configs/releng "$build"
 
           sed -i "s/^linux$/$kernel/" "$build"/packages.x86_64
-          sed -i "s/initramfs-linux/initramfs-$kernel/g" "$build"/loopback.cfg
-          sed -i "s/vmlinuz-linux/vmlinuz-$kernel/g" "$build"/loopback.cfg
+          sed -i "s/initramfs-linux/initramfs-$kernel/g" "$build"/grub/loopback.cfg
+          sed -i "s/vmlinuz-linux/vmlinuz-$kernel/g" "$build"/grub/loopback.cfg
 
           pkg_add=(
           "zfs-$kernel"
