@@ -97,15 +97,14 @@ jobs:
           ls -alh
           mkdir extracted && cd extracted
 
-          mkdir -p ./extracted_boot
-          osirrox -indev "../archlinux-lts-zfs-$release_date-x86_64.iso" -extract_boot_images ./extracted_boot -extract /EFI/BOOT/BOOTx64.EFI ./extracted_boot/loader.efi
+          osirrox -indev "../archlinux-lts-zfs-$release_date-x86_64.iso" -extract_boot_images ./ -extract /EFI/BOOT/BOOTx64.EFI ./loader.efi
 
           curl -o BOOTx64.EFI https://blog.hansenpartnership.com/wp-uploads/2013/PreLoader.efi
           curl -o HashTool.efi https://blog.hansenpartnership.com/wp-uploads/2013/HashTool.efi
 
-          mcopy -D oO -i ./extracted_boot/eltorito_img2_uefi.img ./extracted_boot/BOOTx64.EFI ./extracted_boot/loader.efi ./extracted_boot/HashTool.efi ::/EFI/BOOT/
+          mcopy -D oO -i ./eltorito_img2_uefi.img ./BOOTx64.EFI ./loader.efi ./HashTool.efi ::/EFI/BOOT/
 
-          xorriso -indev "../archlinux-lts-zfs-$release_date-x86_64.iso" -outdev "archlinux-lts-zfs-sb-$release_date-x86_64.iso" -map_l ./extracted_boot/ /EFI/BOOT/ BOOTx64.EFI loader.efi HashTool.efi -- -boot_image any replay -append_partition 2 0xef ./extracted_boot/eltorito_img2_uefi.img
+          xorriso -indev "../archlinux-lts-zfs-$release_date-x86_64.iso" -outdev "archlinux-lts-zfs-sb-$release_date-x86_64.iso" -map_l ./ /EFI/BOOT/ BOOTx64.EFI loader.efi HashTool.efi -- -boot_image any replay -append_partition 2 0xef ./eltorito_img2_uefi.img
 
           mv archlinux-lts-zfs-sb-$release_date-x86_64.iso ../archlinux-lts-zfs-$release_date-x86_64.iso
           cd .. && rm -rf extracted
